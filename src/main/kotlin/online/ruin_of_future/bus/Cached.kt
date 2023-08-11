@@ -1,4 +1,4 @@
-package online.ruin_of_future.reporter
+package online.ruin_of_future.bus
 
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex

@@ -1,2 +1,2 @@
-rootProject.name = "news-reporter"
+rootProject.name = "news-bus"
 

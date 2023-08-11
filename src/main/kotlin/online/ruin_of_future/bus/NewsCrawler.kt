@@ -1,21 +1,11 @@
-package online.ruin_of_future.reporter
+package online.ruin_of_future.bus
 
-import kotlinx.coroutines.awaitAll
-import okhttp3.internal.concurrent.TaskRunner.Companion.logger
-import java.io.IOException
 import org.jsoup.Jsoup
-import java.awt.Color
 import java.awt.Font
-import java.awt.Image.SCALE_SMOOTH
-import java.awt.RenderingHints
-import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
-import java.net.URL
-import java.time.LocalDate
+import java.io.IOException
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import javax.imageio.ImageIO
-import javax.swing.text.DateFormatter
 
 class NewsCrawler {
     private val httpGetter = HTTPGetter()
