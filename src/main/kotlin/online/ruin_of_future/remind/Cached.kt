@@ -1,4 +1,4 @@
-package online.ruin_of_future.bus
+package online.ruin_of_future.remind
 
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex

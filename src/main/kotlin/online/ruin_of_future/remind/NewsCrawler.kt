@@ -1,4 +1,4 @@
-package online.ruin_of_future.bus
+package online.ruin_of_future.remind
 
 import org.jsoup.Jsoup
 import java.awt.Font

@@ -1,2 +1,2 @@
-rootProject.name = "news-bus"
+rootProject.name = "news-remind"
 

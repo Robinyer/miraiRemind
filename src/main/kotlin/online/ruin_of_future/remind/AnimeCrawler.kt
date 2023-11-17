@@ -1,4 +1,4 @@
-package online.ruin_of_future.bus
+package online.ruin_of_future.remind
 
 import kotlinx.coroutines.delay
 import kotlinx.serialization.ExperimentalSerializationApi
