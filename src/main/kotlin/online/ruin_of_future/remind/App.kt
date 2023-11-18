@@ -119,6 +119,7 @@ object ReporterPlugin : KotlinPlugin(
             cal[Calendar.SECOND] = 0
             val dateRepresentation = cal.time
             if (cal.time.time < System.currentTimeMillis()) {
+                logger.info("cal.time.time < System.currentTimeMillis()")
                 dateRepresentation.time += 24 * 60 * 60 * 1000
             }
             val daySpan = (24 * 60 * 60 * 1000).toLong()
@@ -126,7 +127,7 @@ object ReporterPlugin : KotlinPlugin(
                 for (groupId in RemindGroupWhiteList.groupIdsPerBot[bot.id]!!) {
                     timer.scheduleAtFixedRate(
                         MyAutoTimerTaskRemind(bot.id, groupId),
-                        dateRepresentation,
+                        Date(dateRepresentation.time),
                         daySpan
                     )
                 }
@@ -144,11 +145,11 @@ object ReporterPlugin : KotlinPlugin(
                         continue
                     }
                     for (i in remindInfo.myTimerTaskRemindList.indices) {
+                        logger.info("dateRepresentation: $dateRepresentation")
                         timer.schedule(
                             remindInfo.myTimerTaskRemindList[i],
-                            dateRepresentation
+                            Date(dateRepresentation.time + 24 * 60 * 60 * 1000 * i)
                         )
-                        dateRepresentation.time += 24 * 60 * 60 * 1000
                     }
                 }
             }
@@ -258,7 +259,7 @@ object ReporterPlugin : KotlinPlugin(
                     return@matching
                 }
                 group.sendMessage(
-                    "当前为0.2测试版，可用指令为:\n" +
+                    "当前为0.3测试版，可用指令为:\n" +
                             "1.投骰子 输入0-6的整数可加大该床号中奖概率 [0-6]|-r|-roll\n" +
                             "2.查看当前接水计划和时间 (-l)|(-list)\n" +
                             "3.清除当前接水计划 (-c)|(-clear)\n" +
