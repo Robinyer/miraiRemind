@@ -70,14 +70,15 @@ object ReporterPlugin : KotlinPlugin(
                 val bot = Bot.getInstance(botId)
                 if (bot.id in RemindGroupWhiteList.groupIdsPerBot) {
                     try {
-                        logger.info("auto reload remind")
                         val group = bot.getGroup(groupId)!!
-                        logger.info("$group")
+                        val groupInfo = RemindGroupInfoList.groupInfoPerBot[bot.id]?.get(groupId)!!
+                        if (groupInfo.myTimerTaskRemindList.isNotEmpty()) {
+                            return@async
+                        }
                         group.sendMessage("无人投掷，自动开投！")
-                        val random = Random()
+                        val random = Random(System.currentTimeMillis())
                         val randomInt = random.nextInt(6)
                         val memberId = qqList[randomInt]
-                        logger.info("$group")
                         val chain = buildMessageChain {
                             At(memberId)
                             +PlainText(
@@ -90,7 +91,6 @@ object ReporterPlugin : KotlinPlugin(
                                 }很幸运的被抽中了！速去接水！"
                             )
                         }
-                        val groupInfo = RemindGroupInfoList.groupInfoPerBot[bot.id]?.get(groupId)!!
                         groupInfo.lastMemberId = memberId
                         group.sendMessage(chain)
                     } catch (e: Exception) {
@@ -259,11 +259,12 @@ object ReporterPlugin : KotlinPlugin(
                     return@matching
                 }
                 group.sendMessage(
-                    "当前为0.3测试版，可用指令为:\n" +
+                    "当前为0.4测试版，可用指令为:\n" +
                             "1.投骰子 输入0-6的整数可加大该床号中奖概率 [0-6]|-r|-roll\n" +
                             "2.查看当前接水计划和时间 (-l)|(-list)\n" +
                             "3.清除当前接水计划 (-c)|(-clear)\n" +
-                            "4.帮助 (-h)|(-help)"
+                            "4.帮助 (-h)|(-help)\n" +
+                            "项目开源地址: "
                 )
             }
         }
